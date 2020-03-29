@@ -18,5 +18,7 @@ int cbinsearch(int* arr, int size, int value)
 		index--;
 	}
 
-	return count;
+	if (count!=0)
+	 return count;
+	else return 0;
 }
