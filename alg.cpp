@@ -1,36 +1,33 @@
-int cbinsearch(int* arr, int size, int value)
-{
-	int count = 0;
-	int i = 0, j = size, mid = (i + j) / 2;
-	while (i <= j)
-	{
-		if (arr[mid] == value)
-		{
+int cbinsearch(int *arr, int size, int value){
+	int count = 0, mid = 0, l = 0, r = size - 1, key = 0;
+	while (l <= r) {
+		mid = (l + r) / 2;
+		if (value == arr[mid]) {
 			count++;
-			break;
+			key = mid;
+			while (key > 0) {
+				if (arr[key - 1] != value)
+					break;
+				else {
+					count++;
+					key--;
+				}
+			}
+			key = mid;
+			while (key < (size - 1)) {
+				if (arr[key + 1] != value)
+					break;
+				else {
+					count++;
+					key++;
+				}
+			}
+			return count;
 		}
-		if (arr[mid] < value)
-		{
-			i = mid + 1;
-			mid = (i + j) / 2;
-		}
-		if (arr[mid] > value)
-		{
-			j = mid - 1;
-			mid = (i + j) / 2;
-		}
-	}
-	int s = 1;
-	while ((mid - s >= 0) && (arr[mid - s] == value))
-	{
-		count++;
-		s++;
-	}
-	s = 1;
-	while ((mid + s <= size) && (arr[mid + s] == value))
-	{
-		count++;
-		s++;
+		else if (value < arr[mid])
+			r = mid - 1;
+		else
+			l = mid + 1;
 	}
 	return count;
 }
